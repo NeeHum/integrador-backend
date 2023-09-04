@@ -1,12 +1,25 @@
 import styled from "styled-components";
 
+export const ShadowLogin = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+`;
+
 export const DivLogin = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--darkpurple);
   padding: 40px;
-  margin-top: -25px;
-  margin-left: -10px;
+  margin-top: 0px;
+  margin-left: 0px;
   border-radius: 15px;
 `;
 
@@ -53,6 +66,32 @@ export const ButtonLogin = styled.button`
     border: 1px solid var(--white);
   }
 `;
+
+export const ButtonClose = styled.button`
+  margin-top: 25px;
+  text-align: center;
+  border: none;
+  font-family: "Oswald", sans-serif;
+  color: var(--red);
+  background-color: var(--white);
+  border: 1px solid var(--red);
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  :hover {
+    background-color: var(--red);
+    color: var(--white);
+    border: 1px solid var(--white);
+  }
+
+  :active {
+    background-color: var(--purple);
+    color: var(--white);
+    border: 1px solid var(--white);
+  }
+`;
+
 
 export const ButtonRegister = styled.button`
   text-align: center;

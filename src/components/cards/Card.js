@@ -5,33 +5,49 @@ import {
   TittleGameCard,
   DataCard,
   PriceCard,
-  ButtonBuyCard
+  SpanAdd,
+  ButtonBuyCard,
 } from "./CardStyled";
 
-const Card = ({ title, imgGame, priceGame, addToCart, cartItems, setCartItems }) => {
+const Card = ({
+  title,
+  imgGame,
+  priceGame,
+  addToCart,
+  cartItems,
+  setCartItems,
+}) => {
   const handleAddToCart = () => {
     const product = {
       title,
       imgGame,
-      priceGame, 
-      price: parseFloat(priceGame), 
+      priceGame,
+      price: parseFloat(priceGame),
     };
     addToCart(product);
   };
+
+  // Construye la URL completa de la imagen usando la ruta relativa
+  const imageUrl = `${imgGame}`;
+
+  // Busca el elemento correspondiente en el carrito para obtener la cantidad
+  const cartItem = cartItems.find((item) => item.title === title);
+  const quantity = cartItem ? cartItem.quantity : 0;
 
   return (
     <>
       <DivCard>
         <div>
-          <ImgGame src={imgGame} alt={title} />
+          <ImgGame src={imageUrl} alt={title} />
         </div>
         <DataCard>
           <TittleGameCard>{title}</TittleGameCard>
-          <PriceCard>${priceGame}</PriceCard>
+
           <ButtonBuyCard onClick={handleAddToCart}>ADD TO CART</ButtonBuyCard>
+          <PriceCard>${priceGame}</PriceCard>
+          {quantity >= 1 && <SpanAdd>({quantity}) ADDED</SpanAdd>}
         </DataCard>
       </DivCard>
-      
     </>
   );
 };

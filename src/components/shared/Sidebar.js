@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Modal from "../auth/Modal";
 import Login from "../auth/Login";
 import { Link } from "react-scroll";
 
@@ -12,6 +11,7 @@ import {
   SpanCopy,
   ButtonSidebar,
 } from "./SidebarStyled.js";
+
 import {
   CardBuy,
   DivArticles,
@@ -28,6 +28,7 @@ import {
   TittleCart,
   TittleGame,
 } from "./CartStyled";
+
 import {
   RiHome4Line,
   RiPercentLine,
@@ -38,6 +39,7 @@ import {
   RiDeleteBin6Line,
   RiCloseLine,
 } from "react-icons/ri";
+
 import logo from "../../assets/img/logo.png";
 import {
   ConteinerDivMobile,
@@ -50,7 +52,8 @@ const Sidebar = ({ cartItems, setCartItems }) => {
   const [opencart, setOpencart] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleRemoveFromCart = (index) => {
     const updatedCartItems = [...cartItems];
@@ -74,8 +77,13 @@ const Sidebar = ({ cartItems, setCartItems }) => {
     }, 3000);
   };
 
+  const handleLoginClick = () => {
+    if (!isLoggedIn) {
+      toggleModal(<Login setIsLoggedIn={setIsLoggedIn} closeModal={closeModal} />);
+    }
+  };
+
   const openModal = (content) => {
-    setModalContent(content);
     setShowModal(true);
   };
 
@@ -91,14 +99,9 @@ const Sidebar = ({ cartItems, setCartItems }) => {
     }
   };
 
-  const handleLoginClick = () => {
-    toggleModal(<Login />);
-  };
-
   return (
     <>
       {/* ---Sidebar--- */}
-
       <DivNav>
         <NavSidebar open={open}>
           <UlSidebar>
@@ -160,11 +163,16 @@ const Sidebar = ({ cartItems, setCartItems }) => {
                 <RiGamepadLine />
               </Link>
             </LiSidebar>
-            <LiSidebar>
-              <ButtonSidebar onClick={handleLoginClick}>
-                <RiAccountCircleLine />
-              </ButtonSidebar>
-            </LiSidebar>
+
+            {/* Renderizamos el botón de inicio de sesión solo si el usuario no ha iniciado sesión */}
+            {!isLoggedIn && (
+              <LiSidebar>
+                <ButtonSidebar onClick={handleLoginClick}>
+                  <RiAccountCircleLine />
+                </ButtonSidebar>
+              </LiSidebar>
+            )}
+
             <LiSidebar>
               <ButtonSidebar onClick={() => setOpencart(!opencart)}>
                 {opencart ? <RiCloseLine /> : <RiShoppingCart2Line />}
@@ -174,13 +182,10 @@ const Sidebar = ({ cartItems, setCartItems }) => {
           <SpanCopy>Buy Games © 2023</SpanCopy>
         </NavSidebar>
       </DivNav>
-
       {/* ---mobile button menu--- */}
-
       <ConteinerDivMobile>
         <NavMobile>
           <ButtonMobile>
-            {/* ---Toggle system--- */}
             {open ? (
               <RiCloseLine onClick={() => setOpen(!open)} />
             ) : (
@@ -189,9 +194,7 @@ const Sidebar = ({ cartItems, setCartItems }) => {
           </ButtonMobile>
         </NavMobile>
       </ConteinerDivMobile>
-
       {/* ---cart--- */}
-
       <DivCart opencart={opencart}>
         <DivGralCart>
           <TittleCart>🛒 YOUR CART 🛒</TittleCart>
@@ -241,9 +244,8 @@ const Sidebar = ({ cartItems, setCartItems }) => {
           </ThankYou>
         )}
       </DivCart>
-
-      {/* ---Modal--- */}
-      {showModal && <Modal closeModal={closeModal}>{modalContent}</Modal>}
+      {/* ---Login component directly--- */}
+      {showModal && <Login setIsLoggedIn={setIsLoggedIn} closeModal={closeModal} />}
     </>
   );
 };

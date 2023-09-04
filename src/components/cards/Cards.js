@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import Card from "./Card";
-import { DivArticlesCards, ListGames } from "./CardsStyled";
-import cards from "./DataProducts";
-import {
-  ButtonCategories,
-  LiCategories,
-  UlCategories,
-} from "../main/MainStyled";
+import React, { useState, useEffect } from 'react';
+import Card from './Card';
+import { DivArticlesCards, ListGames } from './CardsStyled';
+import { ButtonCategories, LiCategories, UlCategories } from '../main/MainStyled';
 
 const Cards = ({ cartItems, setCartItems }) => {
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
+  const [productos, setProductos] = useState([]);
 
-  const handleCategoriaSeleccionada = (categoria) => {
-    setCategoriaSeleccionada(categoria);
-  };
+  useEffect(() => {
+    // Realiza una solicitud HTTP GET para obtener los productos desde el servidor
+    fetch('http://localhost:5000/api/productos') // Reemplaza con la URL de tu servidor backend
+      .then((response) => response.json())
+      .then((data) => setProductos(data))
+      .catch((error) => console.error('Error al obtener productos:', error));
+  }, []);
 
   const addToCart = (product) => {
-    const existingItemIndex = cartItems.findIndex(
-      (item) => item.title === product.title
-    );
+    // Verifica si el producto ya está en el carrito
+    const existingItemIndex = cartItems.findIndex((item) => item.title === product.title);
+
     if (existingItemIndex !== -1) {
-      // Si el producto ya existe en el carrito, actualiza la cantidad en lugar de agregar una nueva tarjeta
+      // Si el producto ya existe en el carrito, actualiza la cantidad en lugar de agregar un nuevo tarjeta
       const updatedCartItems = [...cartItems];
       updatedCartItems[existingItemIndex].quantity += 1;
       setCartItems(updatedCartItems);
@@ -33,10 +33,9 @@ const Cards = ({ cartItems, setCartItems }) => {
     }
   };
 
-  const cardsFiltradas = cards.filter(
-    (card) =>
-      card.categoria.id === categoriaSeleccionada ||
-      categoriaSeleccionada === ""
+  const cardsFiltradas = productos.filter(
+    (producto) =>
+      producto.categoria.id === categoriaSeleccionada || categoriaSeleccionada === ''
   );
 
   return (
@@ -45,28 +44,22 @@ const Cards = ({ cartItems, setCartItems }) => {
         <div>
           <UlCategories>
             <LiCategories>
-              <ButtonCategories onClick={() => handleCategoriaSeleccionada("")}>
+              <ButtonCategories onClick={() => setCategoriaSeleccionada('')}>
                 ALL
               </ButtonCategories>
             </LiCategories>
             <LiCategories>
-              <ButtonCategories
-                onClick={() => handleCategoriaSeleccionada("FPS")}
-              >
+              <ButtonCategories onClick={() => setCategoriaSeleccionada('FPS')}>
                 FPS
               </ButtonCategories>
             </LiCategories>
             <LiCategories>
-              <ButtonCategories
-                onClick={() => handleCategoriaSeleccionada("OpenWorld")}
-              >
+              <ButtonCategories onClick={() => setCategoriaSeleccionada('OpenWorld')}>
                 OPEN WORLD
               </ButtonCategories>
             </LiCategories>
             <LiCategories>
-              <ButtonCategories
-                onClick={() => handleCategoriaSeleccionada("Adventure")}
-              >
+              <ButtonCategories onClick={() => setCategoriaSeleccionada('Adventure')}>
                 ADVENTURE
               </ButtonCategories>
             </LiCategories>
@@ -74,16 +67,16 @@ const Cards = ({ cartItems, setCartItems }) => {
         </div>
 
         <DivArticlesCards>
-          {cardsFiltradas.map((card) => (
+          {cardsFiltradas.map((producto) => (
             <Card
-              key={card.id}
-              title={card.titulo}
-              imgGame={card.imagen}
-              priceGame={card.precio}
-              price={parseFloat(card.precio)}
+              key={producto.id}
+              title={producto.titulo}
+              imgGame={producto.imagen}
+              priceGame={producto.precio}
               addToCart={addToCart}
               cartItems={cartItems}
               setCartItems={setCartItems}
+              categoriaSeleccionada={categoriaSeleccionada}
             />
           ))}
         </DivArticlesCards>

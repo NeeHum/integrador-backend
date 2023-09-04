@@ -38,6 +38,13 @@ export const PriceCard = styled.span`
   color: var(--white);
 `;
 
+export const SpanAdd = styled.span`
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+  color: var(--green);
+`;
+
 export const ButtonBuyCard = styled.button`
   font-weight: 600;
   margin-top: 10px;
