@@ -12,7 +12,7 @@ import {
   ShadowLogin,
 } from "./LoginStyled";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, updateUserName }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showRegister, setShowRegister] = useState(false);
@@ -42,7 +42,10 @@ const Login = ({ setIsLoggedIn }) => {
           setShowRegister(false);
           setShowLogin(false);
           setShowShadow(false);
-          setIsLoggedIn(true); // Aquí actualizamos el estado en Sidebar
+          setIsLoggedIn(true);
+
+          // Llamamos a la función para actualizar el nombre del usuario en Sidebar
+          updateUserName(user.firstName);
         }, 5000);
       } else {
         console.error("Credenciales inválidas");
@@ -121,4 +124,3 @@ const Login = ({ setIsLoggedIn }) => {
 };
 
 export default Login;
-

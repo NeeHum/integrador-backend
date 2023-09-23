@@ -106,3 +106,27 @@ export const SpanCopy = styled.span`
   font-size: large;
   padding: 0px 15px;
 `;
+
+export const SpanUser = styled.span`
+  color: var(--white);
+  text-align: center;
+  align-items: center;
+  font-family: "arial black";
+  font-size: 12px;
+  padding: 0px;
+  margin-bottom: 10px;
+`;
+
+export const ButtonLogOut = styled.button`
+  padding: 0px 5px;
+  border-radius: 100%;
+  color: var(--pink);
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--pink);
+    color: var(--white);
+    transition: all 0.5s;
+  }
+`;

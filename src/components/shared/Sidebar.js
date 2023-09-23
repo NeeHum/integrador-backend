@@ -9,6 +9,8 @@ import {
   UlSidebar,
   LiSidebar,
   SpanCopy,
+  SpanUser,
+  ButtonLogOut,
   ButtonSidebar,
 } from "./SidebarStyled.js";
 
@@ -53,6 +55,8 @@ const Sidebar = ({ cartItems, setCartItems }) => {
   const [showThanks, setShowThanks] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState(""); // Nuevo estado
+  const [showLogout, setShowLogout] = useState(false); // Nuevo estado
 
   const handleRemoveFromCart = (index) => {
     const updatedCartItems = [...cartItems];
@@ -78,7 +82,13 @@ const Sidebar = ({ cartItems, setCartItems }) => {
 
   const handleLoginClick = () => {
     if (!isLoggedIn) {
-      toggleModal(<Login setIsLoggedIn={setIsLoggedIn} closeModal={closeModal} />);
+      toggleModal(
+        <Login
+          setIsLoggedIn={setIsLoggedIn}
+          updateUserName={setUserName} // Corrección aquí
+          closeModal={closeModal}
+        />
+      );
     }
   };
 
@@ -96,6 +106,12 @@ const Sidebar = ({ cartItems, setCartItems }) => {
     } else {
       openModal(content);
     }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserName("");
+    setShowLogout(false);
   };
 
   return (
@@ -172,6 +188,20 @@ const Sidebar = ({ cartItems, setCartItems }) => {
               </LiSidebar>
             )}
 
+            {/* Mostramos el nombre de usuario si está logueado */}
+            {isLoggedIn && <SpanUser>{userName}</SpanUser>}
+
+            {isLoggedIn && !showLogout && (
+              <ButtonLogOut onClick={() => setShowLogout(true)}>↩</ButtonLogOut>
+            )}
+
+            {showLogout && (
+              <>
+                <SpanUser>Log Out?</SpanUser>
+                <ButtonLogOut onClick={handleLogout}>✔</ButtonLogOut>
+              </>
+            )}
+
             <LiSidebar>
               <ButtonSidebar onClick={() => setOpencart(!opencart)}>
                 {opencart ? <RiCloseLine /> : <RiShoppingCart2Line />}
@@ -244,7 +274,13 @@ const Sidebar = ({ cartItems, setCartItems }) => {
         )}
       </DivCart>
       {/* ---Login component directly--- */}
-      {showModal && <Login setIsLoggedIn={setIsLoggedIn} closeModal={closeModal} />}
+      {showModal && (
+        <Login
+          setIsLoggedIn={setIsLoggedIn}
+          updateUserName={setUserName}
+          closeModal={closeModal}
+        />
+      )}
     </>
   );
 };
