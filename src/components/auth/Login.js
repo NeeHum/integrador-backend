@@ -42,6 +42,7 @@ const Login = ({ setIsLoggedIn }) => {
           setShowRegister(false);
           setShowLogin(false);
           setShowShadow(false);
+          setIsLoggedIn(true); // Aquí actualizamos el estado en Sidebar
         }, 5000);
       } else {
         console.error("Credenciales inválidas");
@@ -120,6 +121,4 @@ const Login = ({ setIsLoggedIn }) => {
 };
 
 export default Login;
-
-
 

@@ -52,7 +52,6 @@ const Sidebar = ({ cartItems, setCartItems }) => {
   const [opencart, setOpencart] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleRemoveFromCart = (index) => {
