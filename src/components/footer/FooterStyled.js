@@ -8,6 +8,19 @@ export const FooterContainer = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 120px;
+
+@media (max-width: 800px) {
+  padding-left: 15px;
+    
+  }
+
+  @media (min-width: 800px) and (max-width: 1280px) {
+    padding-left: 15px;
+    
+  }
+
+
 `;
 
 export const FooterContent = styled.div`

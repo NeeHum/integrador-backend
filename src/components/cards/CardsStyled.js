@@ -15,10 +15,10 @@ export const DivArticlesCards = styled.div`
 
 export const ListGames = styled.div`
 
-margin-left: 100px;
+margin-left: 90px;
 
 @media (max-width: 800px) {
-  margin-left: 0px;
+  margin-left: -15px;
     
   }
 
