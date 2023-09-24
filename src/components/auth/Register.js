@@ -27,7 +27,7 @@ const Register = ({ onClose, onRegister }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/usuarios",
+        "backend-integradorbackend.vercel.app/api/usuarios",
         user
       );
       console.log("Usuario registrado:", response.data);

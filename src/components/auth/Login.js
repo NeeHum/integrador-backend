@@ -26,7 +26,7 @@ const Login = ({ setIsLoggedIn, updateUserName }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
+      const response = await axios.post("backend-integradorbackend.vercel.app/api/login", {
         email,
         password,
       });
