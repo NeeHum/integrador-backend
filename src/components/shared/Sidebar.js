@@ -27,6 +27,7 @@ import {
   PriceTotal,
   SpanEmptyCart,
   ThankYou,
+  Empty,
   TittleCart,
   TittleGame,
 } from "./CartStyled";
@@ -57,6 +58,7 @@ const Sidebar = ({ cartItems, setCartItems }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(""); 
   const [showLogout, setShowLogout] = useState(false); 
+  const [isEmptyCart, setIsEmptyCart] = useState(false); // Nuevo estado para verificar si el carrito está vacío
 
   const handleRemoveFromCart = (index) => {
     const updatedCartItems = [...cartItems];
@@ -73,11 +75,20 @@ const Sidebar = ({ cartItems, setCartItems }) => {
   };
 
   const handlePurchase = () => {
-    setCartItems([]);
-    setShowThanks(true);
-    setTimeout(() => {
-      setShowThanks(false);
-    }, 3000);
+    if (cartItems.length === 0) {
+      // El carrito está vacío, muestra el mensaje correspondiente
+      setIsEmptyCart(true);
+      setTimeout(() => {
+        setIsEmptyCart(false);
+      }, 3000);
+    } else {
+      // El carrito no está vacío, procede con la compra
+      setCartItems([]);
+      setShowThanks(true);
+      setTimeout(() => {
+        setShowThanks(false);
+      }, 3000);
+    }
   };
 
   const handleLoginClick = () => {
@@ -271,6 +282,11 @@ const Sidebar = ({ cartItems, setCartItems }) => {
           <ThankYou>
             <h3>THANKS FOR YOUR PURCHASE</h3>
           </ThankYou>
+        )}
+        {isEmptyCart && (
+          <Empty>
+            <h3>THE CART IS EMPTY</h3>
+          </Empty>
         )}
       </DivCart>
       {/* ---Login component directly--- */}
