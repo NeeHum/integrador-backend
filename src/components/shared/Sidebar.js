@@ -55,8 +55,8 @@ const Sidebar = ({ cartItems, setCartItems }) => {
   const [showThanks, setShowThanks] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState(""); // Nuevo estado
-  const [showLogout, setShowLogout] = useState(false); // Nuevo estado
+  const [userName, setUserName] = useState(""); 
+  const [showLogout, setShowLogout] = useState(false); 
 
   const handleRemoveFromCart = (index) => {
     const updatedCartItems = [...cartItems];
@@ -85,7 +85,7 @@ const Sidebar = ({ cartItems, setCartItems }) => {
       toggleModal(
         <Login
           setIsLoggedIn={setIsLoggedIn}
-          updateUserName={setUserName} // Corrección aquí
+          updateUserName={setUserName} 
           closeModal={closeModal}
         />
       );

@@ -9,7 +9,7 @@ const Cards = ({ cartItems, setCartItems }) => {
 
   useEffect(() => {
     // Realiza una solicitud HTTP GET para obtener los productos desde el servidor
-    fetch('https://backend-integradorbackend.vercel.app/api/productos') // Reemplaza con la URL de tu servidor backend
+    fetch('https://backend-integradorbackend.vercel.app/api/productos') // URL de servidor backend
       .then((response) => response.json())
       .then((data) => setProductos(data))
       .catch((error) => console.error('Error al obtener productos:', error));
