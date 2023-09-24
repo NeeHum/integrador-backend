@@ -57,7 +57,6 @@ export const TittleCart = styled.h3`
   }
 
   @media (min-width: 800px) and (max-width: 1280px) {
-    
   }
 `;
 
@@ -197,13 +196,11 @@ export const SpanEmptyCart = styled.span`
   color: var(--white);
   align-items: center;
 
-   @media (max-width: 800px) {
+  @media (max-width: 800px) {
     font-size: 15px;
-    
   }
 
   @media (min-width: 800px) and (max-width: 1280px) {
-    
   }
 `;
 
@@ -213,13 +210,11 @@ export const PriceTotal = styled.p`
 
   color: var(--blue);
 
-   @media (max-width: 800px) {
+  @media (max-width: 800px) {
     font-size: 15px;
-    
   }
 
   @media (min-width: 800px) and (max-width: 1280px) {
-    
   }
 `;
 
@@ -254,3 +249,23 @@ export const ThankYou = styled.div`
   );
   border-radius: 20px;
 `;
+
+export const Empty = styled.div`
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  font-family: "Oswald", sans-serif;
+  color: var(--white);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 0, 0, 1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 20px;
+`;
+
