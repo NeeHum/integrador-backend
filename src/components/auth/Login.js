@@ -26,10 +26,13 @@ const Login = ({ setIsLoggedIn, updateUserName }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("backend-integradorbackend.vercel.app/api/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://backend-integradorbackend.vercel.app/api/login",
+        {
+          email,
+          password,
+        }
+      );
 
       const user = response.data;
 
@@ -98,7 +101,10 @@ const Login = ({ setIsLoggedIn, updateUserName }) => {
                 />
 
                 <ButtonLogin type="submit">LOGIN</ButtonLogin>
-                <ButtonRegister type="button" onClick={() => setShowRegister(true)}>
+                <ButtonRegister
+                  type="button"
+                  onClick={() => setShowRegister(true)}
+                >
                   SIGN IN
                 </ButtonRegister>
                 <ButtonClose type="button" onClick={closeLogin}>
@@ -109,7 +115,10 @@ const Login = ({ setIsLoggedIn, updateUserName }) => {
           )}
 
           {showRegister && (
-            <Register onRegister={handleRegister} onClose={() => setShowRegister(false)} />
+            <Register
+              onRegister={handleRegister}
+              onClose={() => setShowRegister(false)}
+            />
           )}
 
           {showWelcomeMessage && (

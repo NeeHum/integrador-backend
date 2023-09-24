@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import {
   ButtonCancelRegister,
   ButtonRegisterOk,
@@ -27,7 +27,7 @@ const Register = ({ onClose, onRegister }) => {
 
     try {
       const response = await axios.post(
-        "backend-integradorbackend.vercel.app/api/usuarios",
+        "https://backend-integradorbackend.vercel.app/api/usuarios",
         user
       );
       console.log("Usuario registrado:", response.data);
